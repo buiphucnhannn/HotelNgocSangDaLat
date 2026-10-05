@@ -1,0 +1,207 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-display), Georgia, serif;
+  --font-script: var(--font-script), cursive;
+
+  /* Đỏ rượu vang thượng hạng (giống mockup 100%) */
+  --color-brand-primary: #700c18;
+  --color-brand-primary-hover: #861320;
+  --color-brand-primary-dark: #550812;
+
+  /* Vàng kim hoàng gia */
+  --color-brand-gold: #c59b27;
+  --color-brand-gold-light: #edd89b;
+  --color-brand-gold-dark: #936f11;
+
+  /* Tone màu kem ấm áp Đà Lạt */
+  --color-cream-base: #FDFBF7;
+  --color-cream-card: #F9F5EE;
+  --color-cream-darker: #F3ECE0;
+
+  /* Nâu sẫm quý phái */
+  --color-espresso-950: #1B1310;
+  --color-espresso-900: #231915;
+  --color-espresso-800: #2D201B;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar sang trọng đồng điệu màu hệ thống (Đỏ rượu vang #700c18 & Nâu Espresso #1C130F) */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1C130F;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #700c18;
+  border-radius: 9999px;
+  border: 2px solid #1C130F;
+  transition: background 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #961625;
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: #B31E31;
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #700c18 #1C130F;
+}
+
+body {
+  background: #FAF6F0;
+  color: #2C221E;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Hero luôn vừa khít đúng 1 viewport (kể cả mobile có thanh địa chỉ co giãn) */
+#home {
+  height: 100vh;
+  height: 100svh;
+  min-height: 620px;
+  min-height: 100svh;
+}
+
+/* Xóa lằn SVC 1px giữa các section do làm tròn sub-pixel:
+   các section sáng cùng màu nền sẽ dính liền như 1 khối */
+main > section + section {
+  margin-top: -1px;
+}
+
+/* Scroll margin để header fixed không che nội dung */
+section[id] {
+  scroll-margin-top: 80px;
+}
+
+#home {
+  scroll-margin-top: 0px !important;
+}
+
+/* ========================================================
+   HỆ THỐNG HIỆU ỨNG XUẤT HIỆN KHI SCROLL (SCROLL REVEAL)
+   Kích hoạt mượt mà cả khi lướt xuống lẫn lướt lên
+   ======================================================== */
+[data-reveal] {
+  opacity: 0;
+  will-change: transform, opacity;
+  transition-property: transform, opacity;
+  transition-duration: 750ms;
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Các biến thể hiệu ứng phong phú cho từng section */
+[data-reveal="fade-up"] {
+  transform: translateY(28px);
+}
+
+[data-reveal="fade-down"] {
+  transform: translateY(-26px);
+}
+
+[data-reveal="fade-left"] {
+  transform: translateX(-34px);
+}
+
+[data-reveal="fade-right"] {
+  transform: translateX(34px);
+}
+
+[data-reveal="scale-up"] {
+  transform: scale(0.94);
+}
+
+[data-reveal="pop-in"] {
+  transform: translateY(20px) scale(0.95);
+}
+
+/* Trạng thái khi phần tử đi vào khung nhìn (cả cuộn lên & cuộn xuống) */
+[data-reveal].revealed {
+  opacity: 1 !important;
+  transform: translate(0, 0) scale(1) !important;
+}
+
+/* Nhịp điệu Stagger Delay */
+[data-reveal-delay="100"] { transition-delay: 100ms; }
+[data-reveal-delay="150"] { transition-delay: 150ms; }
+[data-reveal-delay="200"] { transition-delay: 200ms; }
+[data-reveal-delay="250"] { transition-delay: 250ms; }
+[data-reveal-delay="300"] { transition-delay: 300ms; }
+[data-reveal-delay="350"] { transition-delay: 350ms; }
+[data-reveal-delay="400"] { transition-delay: 400ms; }
+[data-reveal-delay="450"] { transition-delay: 450ms; }
+[data-reveal-delay="500"] { transition-delay: 500ms; }
+[data-reveal-delay="600"] { transition-delay: 600ms; }
+
+/* Vignette chuyển tiếp mềm mại 2 bên rìa hòa với màu nền kem */
+.edge-fade-x {
+  mask-image: linear-gradient(to right, transparent, black 3%, black 97%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 3%, black 97%, transparent);
+}
+
+/* Custom font utilities */
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-script {
+  font-family: var(--font-script);
+}
+
+/* Soft luxury shadow */
+.shadow-hotel {
+  box-shadow: 0 15px 35px -10px rgba(112, 12, 24, 0.08), 0 5px 15px rgba(44, 34, 30, 0.04);
+}
+
+.shadow-card-elevated {
+  box-shadow: 0 20px 45px -15px rgba(0, 0, 0, 0.12), 0 0 20px rgba(197, 155, 39, 0.08);
+}
+
+.shadow-floating {
+  box-shadow: 0 25px 60px -15px rgba(70, 20, 15, 0.2);
+}
+
+/* Full width section backgrounds - tràn 100% màn hình, không bo góc viền ngoài */
+.full-bleed-banner {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+/* Smooth transitions */
+.transition-smooth {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Ẩn hoàn toàn logo Next.js dev indicator ở góc trái dưới */
+[data-nextjs-toast],
+[data-nextjs-dialog-overlay],
+nextjs-portal,
+#nextjs-dev-tools,
+[data-next-badge],
+div[data-nextjs-dev-tools-button],
+[data-nextjs-dev-tools-button],
+div[class*="nextjs-dev-tools"],
+div[class*="nextjs-portal"] {
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+}
